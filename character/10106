@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#define MAX  1000
+int sum[MAX];
+char str_a[MAX];
+char str_b[MAX];
+
+int main()
+{   
+    int i,j,tmp;
+    while(scanf("%s %s",str_a, str_b) != EOF)
+  {
+		memset(sum,0,sizeof(sum));
+		int len1 = strlen(str_a);
+		int len2 = strlen(str_b);
+		for(i=len1-1;i>=0;i--)
+		{
+			for(j=len2-1,tmp = len1-1-i;j>=0;j-- )
+			{
+				sum[tmp++] += (str_a[i] -'0') * (str_b[j] -'0');
+			}
+
+		}
+
+		for(i=0;i<MAX;i++)
+		{
+			sum[i+1] += sum[i] /10;
+			sum[i] = sum[i] %10;
+		}
+	
+	        for(i=MAX-1; i>=0; i--) if(sum[i]) break;  
+        if(i==-1) printf("0");  
+        else for(; i>=0; i--) printf("%d", sum[i]);  
+        putchar('\n');  
+}
+		return 0;
+}
